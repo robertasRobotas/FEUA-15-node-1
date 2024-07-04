@@ -1,18 +1,18 @@
 let cars = [
   {
-    id: 1,
+    id: 111,
     brand: "Porsche",
     model: "Panamera",
     year: 2018,
   },
   {
-    id: 2,
+    id: 222,
     brand: "Fiat",
     model: "500",
     year: 2020,
   },
   {
-    id: 3,
+    id: 333,
     brand: "VW",
     model: "Beetle",
     year: 1990,
@@ -84,4 +84,17 @@ const INSERT_CARS = function (req, res) {
   return res.status(409).json({ message: "Car with this id is already exist" });
 };
 
-module.exports = { GET_CARS, GET_CAR_BY_ID, DELETE_CARS, INSERT_CARS };
+const UPDATE_CAR_BY_ID = (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+
+  const idx = cars.findIndex((car) => {
+    return car.id == id;
+  });
+
+  cars[idx] = { ...cars[idx], ...body };
+
+  return res.status(200).json({ message: "car was updated successfully" });
+};
+
+export { GET_CARS, GET_CAR_BY_ID, DELETE_CARS, INSERT_CARS, UPDATE_CAR_BY_ID };

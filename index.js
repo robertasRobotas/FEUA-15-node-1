@@ -1,8 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const app = express();
+import express from "express";
+import cors from "cors";
+import carRouter from "./src/router/car.js";
 
-const carRouter = require("./src/router/car");
+const app = express();
 
 app.use(cors());
 app.use(express.json());
