@@ -2,7 +2,7 @@ import express from "express";
 import {
   GET_CARS,
   GET_CAR_BY_ID,
-  DELETE_CARS,
+  DELETE_CAR,
   INSERT_CARS,
   UPDATE_CAR_BY_ID,
 } from "../controller/car.js";
@@ -17,6 +17,6 @@ router.post("/cars", INSERT_CARS);
 
 router.put("/cars/:id", UPDATE_CAR_BY_ID);
 
-router.delete("/cars", DELETE_CARS);
+router.delete("/cars/:id", DELETE_CAR);
 
 export default router;
