@@ -24,7 +24,7 @@ const SIGN_UP = async function (req, res) {
     await newUser.save();
 
     return res.status(200).json({
-      cars: newUser,
+      user: newUser,
       message: "user was saved successfully",
     });
   } catch (err) {
@@ -37,13 +37,13 @@ const LOGIN = async function (req, res) {
   const user = await UserModel.findOne({ email: req.body.email });
 
   if (!user) {
-    return res.status(403).json({ message: "Bad auth" });
+    return res.status(401).json({ message: "Bad auth" });
   }
 
   const isPasswordMatch = bcrypt.compareSync(req.body.password, user.password);
 
   if (!isPasswordMatch) {
-    return res.status(403).json({ message: "Bad auth" });
+    return res.status(401).json({ message: "Bad auth" });
   }
 
   const token = jwt.sign(
@@ -51,7 +51,7 @@ const LOGIN = async function (req, res) {
       email: user.email,
       userId: user._id,
     },
-    "PASSWORD123",
+    process.env.JWT_SECRET,
     { expiresIn: "12H" }
   );
 
