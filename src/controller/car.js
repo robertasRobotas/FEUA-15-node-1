@@ -51,6 +51,8 @@ const DELETE_CAR = async function (req, res) {
 
 const INSERT_CAR = async function (req, res) {
   try {
+    console.log(req.body.type);
+
     const car = new CarModel({
       brand: req.body.brand,
       model: req.body.model,
